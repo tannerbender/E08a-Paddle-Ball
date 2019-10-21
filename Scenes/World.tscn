@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/Paddle.gd" type="Script" id=1]
+[ext_resource path="res://Assets/paddle.png" type="Texture" id=2]
+[ext_resource path="res://Assets/ball.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 51.8696, 17.6876 )
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 12.1071
+
+[node name="World" type="Node"]
+
+[node name="Paddle" type="KinematicBody2D" parent="."]
+position = Vector2( 440.595, 509.166 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Paddle"]
+position = Vector2( -13.0264, 5.43176 )
+scale = Vector2( 1.00962, 1.58333 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
+position = Vector2( -13.1342, 4.1167 )
+shape = SubResource( 1 )
+
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2( 431.062, 347.599 )
+physics_material_override = SubResource( 3 )
+gravity_scale = 0.0
+linear_velocity = Vector2( 200, -200 )
+linear_damp = 0.0
+angular_damp = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource( 2 )
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2( -4, -1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall"]
+polygon = PoolVector2Array( 1.80139, 43.6646, 1.80139, 596.725, -200.17, 594.838, -202.057, -228.147, 1026.76, -224.372, 1028.64, 602.388, 845.549, 602.388, 841.774, -7.30005, 32.0027, -7.30005 )
